@@ -1,8 +1,9 @@
 import { useContext } from "react";
 
+import "./Welcome.css";
+
 import Quiz from "../../img/quiz.svg";
 
-import "./Welcome.css";
 import { QuizContext } from "../../context/quiz";
 
 const Welcome = () => {

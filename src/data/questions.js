@@ -26,7 +26,7 @@ const data = [
   },
   {
     question:
-      "Qual destas propriedades da a quantidade de elementos de um array?",
+      "Qual destas propriedades retorna a quantidade de elementos de um array?",
     options: ["qty", "length", "items", "index"],
     answer: "length",
   },

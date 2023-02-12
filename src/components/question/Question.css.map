@@ -1,1 +1,1 @@
-{"version":3,"sources":[],"names":[],"mappings":"","file":"Question.css"}
+{"version":3,"sources":["Question.sass","Question.css"],"names":[],"mappings":"AAAA;EACI,kBAAA;EACA,gBAAA;EACA,yBAAA;EACA,mBAAA;EACA,aAAA;ACCJ;;ADEI;EACI,mBAAA;ACCR;ADAI;EACI,mBAAA;ACER;ADDI;EACI,sBAAA;ACGR","file":"Question.css"}
