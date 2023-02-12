@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useContext } from "react";
 
 import "./PickCategory.css";
 import Category from "../../img/category.svg";
@@ -6,12 +6,27 @@ import Category from "../../img/category.svg";
 import { QuizContext } from "../../context/quiz";
 
 const PickCategory = () => {
+  const [quizState, dispatch] = useContext(QuizContext);
+
+  const chooseCategoryAndReorderQuestions = (category) => {
+    dispatch({ type: "START_GAME", payload: category });
+
+    dispatch({ type: "REORDER_QUESTIONS" });
+  };
+
   return (
     <div id="category">
       <h2>Escolha uma categoria</h2>
       <p>As perguntas serão referentes a uma das linguagens abaixo:</p>
       <div>
-        <button>CSS</button>
+        {quizState.questions.map((question) => (
+          <button
+            onClick={() => chooseCategoryAndReorderQuestions(question.category)}
+            key={question.category}
+          >
+            {question.category}
+          </button>
+        ))}
       </div>
       <img src={Category} alt="Categorias do Quiz" />
     </div>

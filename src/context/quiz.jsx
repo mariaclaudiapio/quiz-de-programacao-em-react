@@ -10,6 +10,7 @@ const initialState = {
   currentQuestion: 0,
   score: 0,
   answerSelected: false,
+  help: false,
 };
 
 const quizReducer = (state, action) => {
@@ -20,8 +21,23 @@ const quizReducer = (state, action) => {
         gameStage: STAGES[1],
       };
 
+    case "START_GAME":
+      let quizQuestions = null;
+
+      state.questions.forEach((question) => {
+        if (question.category === action.payload) {
+          quizQuestions = question.questions;
+        }
+      });
+
+      return {
+        ...state,
+        questions: quizQuestions,
+        gameStage: STAGES[2],
+      };
+
     case "REORDER_QUESTIONS":
-      const reorderedQuestions = questions.sort(() => {
+      const reorderedQuestions = state.questions.sort(() => {
         return Math.random() - 0.5;
       });
       return {
@@ -33,15 +49,16 @@ const quizReducer = (state, action) => {
       const nextQuestion = state.currentQuestion + 1;
       let endGame = false;
 
-      if (!questions[nextQuestion]) {
+      if (!state.questions[nextQuestion]) {
         endGame = true;
       }
 
       return {
         ...state,
         currentQuestion: nextQuestion,
-        gameStage: endGame ? STAGES[2] : state.gameStage,
+        gameStage: endGame ? STAGES[3] : state.gameStage,
         answerSelected: false,
+        help: false,
       };
 
     case "NEW_GAME":
@@ -60,6 +77,12 @@ const quizReducer = (state, action) => {
         ...state,
         score: state.score + correctAnswer,
         answerSelected: option,
+      };
+
+    case "SHOW_TIP":
+      return {
+        ...state,
+        help: "tip",
       };
 
     default:
